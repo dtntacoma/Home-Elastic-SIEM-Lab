@@ -38,14 +38,14 @@ Task 1: Set up an Elastic Account
    6. Wait for the configuration to complete.
    7. Once the deployment is ready, click “continue.”
 
-
 Task 2: Setting up the Linux VM
 
-Next, we need to set up the Linux VM. You can use any Linux OS and virtualization software for this, but I used Kali Linux and Oracle VirtualBox.
+Next, we need to set up the Linux VM. You can use any Linux OS and virtualization software for this, but I’ll be using Kali Linux and Oracle VirtualBox.
 
 To set it up, follow these steps:
 
-    Download the Kali Linux VM from the official Kali website at <a href="https://kali.org">Kali.com</a>
+    Download the Kali Linux VM from the official Kali website at <a href="https://kali.org">Kali.org</a>.
     Create a new VM with the Kali VM file in your preferred virtualization platform, such as VirtualBox or VMware.
     Start the VM and follow the on-screen prompts to install Kali.
     Once the installation is complete, log in to the Kali VM using the credentials “kali” for both the username and password.
+
