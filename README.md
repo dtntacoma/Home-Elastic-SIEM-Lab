@@ -28,7 +28,7 @@ I learned how to set up a home lab for Elastic Stack Security Information and Ev
 Before getting started, I created a free account to set up a cloud Elastic instance that I can run the SIEM on.
 I also installed VirtualBox on my PC.
 
-**** Task 1: Set up an Elastic Account
+**Task 1: Set up an Elastic Account**
 
    1. Sign up for a free trial to use Elastic Cloud at <a href="https://cloud.elastic.co/registration">Elastic.com</a>
    2. Once you have an Elastic account, log in to the Elastic Cloud console at <a href="https://cloud.elastic.co.">Elastic.com</a>
@@ -38,7 +38,7 @@ I also installed VirtualBox on my PC.
    6. Wait for the configuration to complete.
    7. Once the deployment is ready, click “continue.”   
 
-Task 2: Setting up the Linux VM
+**Task 2: Setting up the Linux VM**
 
 Next, you will need to set up the Linux VM. You can use any Linux OS and virtualization software for this, but I used Kali Linux and Oracle VirtualBox.
 
@@ -51,7 +51,7 @@ To set it up, follow these steps:
 
 Note: If you encounter any difficulties with this particular task like I did, you can search for something like this on YouTube: “How to create a virtual machine using VirtualBox/VMware with a Kali VM file.”
 
-Task 3: Setting up the Agent to Collect Logs
+**Task 3: Setting up the Agent to Collect Logs**
 
 An agent is a software program that is installed on a device, such as a server or endpoint, to collect and send data to a centralized system for analysis and monitoring. In the context of Elastic SIEM, an agent is used to collect and forward security-related events from your endpoints to your Elastic SIEM instance.
 
@@ -67,7 +67,7 @@ To set up the agent to collect logs from your Kali VM and forward them to your E
 
 If you get an error installing the agent, make sure that your Kali is connected to the internet before proceeding by pinging google.com.
 
-Task 4: Generating Security Events on the Kali VM
+**Task 4: Generating Security Events on the Kali VM**
 
 To verify that the agent is working correctly, you can generate some security-related events on your Kali VM. To do this, we can use a tool like Nmap. Nmap (Network Mapper) is a free and open-source utility used for network exploration, management, and security auditing. It is designed to discover hosts and services on a computer network, thus creating a “map” of the network. Nmap can be used to scan hosts for open ports, determine the operating system and software running on the target system, and gather other information about the network.
 
@@ -78,7 +78,7 @@ To run an Nmap scan, follow these steps:
       An Nmap scan of my host machine.
    3. This scan generates several security events, such as the detection of open ports and the identification of services running on those ports. Run a few more Nmap scans          (“nmap -sS <ip address>”, “nmap -sT <ip address>”, “nmap -p- <ip address>”etc..”
 
-Task 5: Querying for Security Events in the Elastic SIEM
+**Task 5: Querying for Security Events in the Elastic SIEM**
 
 Now that we have forwarded data from the Kali VM to the SIEM, we can start querying and analyzing the logs in the SIEM.
 
@@ -93,7 +93,7 @@ To do this, follow these steps:
 
 By generating and analyzing different types of security events in Elastic SIEM like the one above, or generating authentication failures by typing in the wrong password for a user or attempting SSH logins an incorrect password, you can gain a better understanding of how security incidents are detected, investigated, and responded to in real-world environments.
 
-Task 6: Create a Dashboard to Visualize the Events
+**Task 6: Create a Dashboard to Visualize the Events**
 
 You can also use the visualizations and dashboards in the SIEM app to analyze the logs and identify patterns or anomalies in the data. For example, you can create a simple dashboard that shows a count of security events over time.
 
@@ -108,7 +108,7 @@ Here’s how you can do that:
    7. Click “close” once you’re done.
    8. Click on the “Save” button to save the visualization and then complete the rest of the settings.
       
-Task 7: Create an Alert
+**Task 7: Create an Alert**
 
 In a SIEM, alerts are a crucial feature for detecting security incidents and responding to them in a timely manner. Alerts are created based on predefined rules or custom queries, and can be configured to trigger specific actions when certain conditions are met. In this task, we will walk through the steps of creating an alert in the Elastic SIEM instance to detect Nmap scans. By following these steps, you can create an alert that will monitor your logs for Nmap scan events and then notify you when they are detected.
 
