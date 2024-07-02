@@ -58,12 +58,19 @@ An agent is a software program that is installed on a device, such as a server o
 To set up the agent to collect logs from your Kali VM and forward them to your Elastic SIEM instance, follow these steps:
 
    1. Log in to your Elastic SIEM instance and navigate to the Integrations page by: clicking on the Kibana main menu bar at the top left, then selecting “Integrations” at          the bottom.
+  ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/6e2ce7fd-0d91-45d1-bc14-0ef8607b16a4)
    2. Search for “Elastic Defend” and click on it to open the integration page.
+  ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/7dd491b9-9c6c-4aae-aedb-6ef36e053312)
    3. Click on “Install Elastic Defend” and follow the instructions provided on the integration page to install the agent on your Kali VM.
       Make sure “Linux” is selected and then copy that command to your clipboard.
+   ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/233f8707-61c9-48df-ae6b-fc8aafa609b3)
+   ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/507967b6-74c4-4ead-987c-fae1b9d64d50)
    4. Paste that command into the Kali terminal (command line).
+   ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/634b4053-af8f-432a-b4cb-e0383a68858b)
    5. Once the agent is installed, which can take a few minutes, you’ll see a message that says “Elastic Agent has been successfully installed.” It will automatically start         collecting and forwarding logs to your Elastic SIEM instance, although it might take a few minutes for the logs to appear in the SIEM.
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/6a83e9c7-4924-4cf6-8a51-394587032b61)
       You can verify that the agent has been installed correctly by running this command: sudo systemctl status elastic-agent.service
+    ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/544ddbdd-6e10-4802-9f76-5e090aeedc66)
 
 If you get an error installing the agent, make sure that your Kali is connected to the internet before proceeding by pinging google.com.
 
@@ -76,7 +83,9 @@ To run an Nmap scan, follow these steps:
    1. Install Nmap on the Linux VM if you’re not using Kali, Nmap already comes preinstalled in Kali. Open a new Terminal and run this command to install it: sudo apt-get           install nmap.
    2. Run a scan on Kali machine by running the command: sudo nmap <vm-ip>. You can also run a scan of your host machine if you place your Kali VM on a “bridged” network.
       An Nmap scan of my host machine.
+   ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/e8e12221-7d6d-411a-88f2-15d555b746c9)
    3. This scan generates several security events, such as the detection of open ports and the identification of services running on those ports. Run a few more Nmap scans          (“nmap -sS <ip address>”, “nmap -sT <ip address>”, “nmap -p- <ip address>”etc..”
+   ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/ff283944-f60d-4a70-b995-0775643fc9db)
 
 **Task 5: Querying for Security Events in the Elastic SIEM**
 
@@ -85,12 +94,14 @@ Now that we have forwarded data from the Kali VM to the SIEM, we can start query
 To do this, follow these steps:
 
    1. Inside your Elastic Deployment, click on the menu icon at the top-left with the three horizontal lines and then click on the “Logs” tab under “Observability” to view          the logs from the Kali VM.
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/55db08a7-fbf0-451f-8a41-eb574ab2d020)
    2. In the search bar, enter a search query to filter the logs. For example, to search for all logs related to Nmap scans, enter the query: event.action:
       “nmap_scan” or process.args: “sudo”.
    3. Click on the “Search” button to execute the search query.
       But please note that it can sometimes take a while for the events to populate and show up on the SIEM, so this query might not work right away (I did not see results          until the next day).
    4. The results of the search query will be displayed in the table below. You can click on the three dots next to each event to view more details.
 
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/945a7cae-99da-4201-bd07-fe11693e22f4)
 By generating and analyzing different types of security events in Elastic SIEM like the one above, or generating authentication failures by typing in the wrong password for a user or attempting SSH logins an incorrect password, you can gain a better understanding of how security incidents are detected, investigated, and responded to in real-world environments.
 
 **Task 6: Create a Dashboard to Visualize the Events**
@@ -101,13 +112,17 @@ Here’s how you can do that:
 
    1. Navigate to the Elastic web portal at <a href="https://cloud.elastic.co.">Elastic.com</a>.
    2. Click on the menu icon on the top-left, then under “Analytics,” click on “Dashboards.”
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/76771e21-2b8c-4d4b-838e-d8f3dd84d12d)
    3. Click on the “Create dashboard” button on the top right to create a new dashboard.
    4. Click on the “Create Visualization” button to add a new visualization to the dashboard.
    5. Select “Area” or “Line” as the visualization type, depending on your preference. This will create a chart that shows the count of events over time.
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/12f02603-b122-4eb3-8101-4f5e39b82ce4)
    6. In the “Metrics” section of the visualization editor on the right, select “Count” as the vertical field type and “Timestamp” for the horizontal field. This will show          the count of events over time.
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/290745e2-30b6-4c82-9ecd-3b294df3a294)
    7. Click “close” once you’re done.
    8. Click on the “Save” button to save the visualization and then complete the rest of the settings.
-      
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/8ba2a5ea-d7f7-4a12-a2e1-420095adfaa7)
+   
 **Task 7: Create an Alert**
 
 In a SIEM, alerts are a crucial feature for detecting security incidents and responding to them in a timely manner. Alerts are created based on predefined rules or custom queries, and can be configured to trigger specific actions when certain conditions are met. In this task, we will walk through the steps of creating an alert in the Elastic SIEM instance to detect Nmap scans. By following these steps, you can create an alert that will monitor your logs for Nmap scan events and then notify you when they are detected.
@@ -116,13 +131,25 @@ Here are the steps:
 
    1. Click on the menu icon on the top-left, then under “Security,” click on “Alerts.”
    2. Click on “Manage rules” at the top right.
-   3. Click on the “Create new rule” button at the top right.
-   4. Under the “Define rule” section, select the “Custom query” option from the dropdown menu.
-   5. Under “Custom query,” set the conditions for the rule. You can use the following query to detect Nmap scan events. This query will match all events with the action            “nmap_scan.” Then click “Continue.”
-   6. Under the “About rule” section, give your rule a name and a description (Nmap Scan Detection).
-   7. Set the severity level for the alert, which can help you prioritize alerts based on their importance. Keep all the other default settings under “Schedule rule” and            click “Continue.”
-   8. In the “Actions” section, select the action you want to take when the rule is triggered. You can choose to send an email notification, create a Slack message, or              trigger a custom webhook.
-   9. Finally, click the “Create and enable rule” button to create the alert.
+    
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/1e25b6f0-8fdc-4413-b45f-f89edef66c53)
+      
+   5. Click on the “Create new rule” button at the top right.
+   6. Under the “Define rule” section, select the “Custom query” option from the dropdown menu.
+   7. Under “Custom query,” set the conditions for the rule. You can use the following query to detect Nmap scan events.
+    
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/14ce5c8f-c42a-4bff-89c8-7ff4a6d28400)
+      
+   10. This query will match all events with the action “nmap_scan.” Then click “Continue.”
+   11. Under the “About rule” section, give your rule a name and a description (Nmap Scan Detection).
+   12. Set the severity level for the alert, which can help you prioritize alerts based on their importance. Keep all the other default settings under “Schedule rule” and            click “Continue.”
+ 
+      ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/ee6cb472-c9fb-4958-83dd-38d66fd2e505)
+
+   15. In the “Actions” section, select the action you want to take when the rule is triggered. You can choose to send an email notification, create a Slack message, or              trigger a custom webhook.
+   16. Finally, click the “Create and enable rule” button to create the alert.
+
+       ![image](https://github.com/dtntacoma/Home-Elastic-SIEM-Lab/assets/172874936/7b3028d4-2890-48b6-8af3-19565efc28fa)
 
 Once you’ve created the alert, it will monitor your logs for Nmap scan events. If an Nmap scan event is detected, the alert will be triggered and the selected action will be taken. You can view and manage your alerts on the “Alerts” section under “Security.”
 
